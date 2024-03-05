@@ -21,7 +21,7 @@ class DogBreedListMapper : Mapper<ResultStatus<DogBreedApiResponse>, DogBreedLis
             it.value
         }
         flattenedListed.forEach { item ->
-            list.addAll(listOf(DogBreed(breedName = item)))
+            list.addAll(listOf(DogBreed(name = item)))
         }
         return list
     }

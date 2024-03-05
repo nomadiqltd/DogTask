@@ -4,7 +4,7 @@ import com.nomadiq.chipdogstask.domain.model.DogBreed
 
 sealed class DogBreedListResult {
     data class Data(
-        val cards: List<DogBreed>? = null
+        val dogBreedsList: List<DogBreed>
     ) : DogBreedListResult()
     data class Error(
         val error: String

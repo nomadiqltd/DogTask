@@ -6,7 +6,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-// TODO - Convert to buildConfigField
+// TODO() - Convert to buildConfigField
 private const val BASE_URL = "https://dog.ceo/api/"
 
 /**
@@ -27,7 +27,7 @@ private val retrofit: Retrofit = Retrofit.Builder()
     .build()
 
 /**
- * A public Api object that exposes the lazy-initialized Retrofit service
+ * A public Api object that exposes the lazy-initialized API Client service
  */
 object DogApiService {
     val apiService: DogApiService by lazy {

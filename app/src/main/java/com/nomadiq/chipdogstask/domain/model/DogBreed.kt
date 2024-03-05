@@ -9,5 +9,5 @@ import com.squareup.moshi.Json
  *
  */
 data class DogBreed(
-    @Json(name = "message") val breedName : String,
+    @Json(name = "message") val name : String,
 )

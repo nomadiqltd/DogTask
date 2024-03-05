@@ -1,12 +1,10 @@
 package com.nomadiq.chipdogstask.data.repository
 
 import com.nomadiq.chipdogstask.data.network.DogApiService
-import android.util.Log
 import com.nomadiq.chipdogstask.data.mapper.DogBreedListMapper
 import com.nomadiq.chipdogstask.domain.mapper.DogBreedListResult
 import com.nomadiq.chipdogstask.data.mapper.ResultStatus
 import com.nomadiq.chipdogstask.data.model.DogBreedApiResponse
-import retrofit2.HttpException
 import retrofit2.Response
 
 /**
@@ -16,7 +14,7 @@ import retrofit2.Response
  * process the result and allow retrieval of data from the [dog ceo api]
  *
  */
-class DogBreedRemoteDataSourceImpl(private val apiClient: DogApiService) : DataSource {
+class DogBreedRemoteDataSourceImpl(private val apiClient: DogApiService) : RemoteDataSource {
 
     private val dogBreedListMapper: DogBreedListMapper by lazy {
         DogBreedListMapper()
@@ -28,10 +26,8 @@ class DogBreedRemoteDataSourceImpl(private val apiClient: DogApiService) : DataS
     }
 
     private suspend fun fetchAllDogBreedResult(): ResultStatus<DogBreedApiResponse> {
-        return exceptionHandler {
-            val response = apiClient.apiService.getAllDogBreeds()
-            buildResultFrom(response)
-        }
+        val response = apiClient.apiService.getAllDogBreeds()
+        return buildResultFrom(response)
     }
 
 
@@ -48,26 +44,6 @@ class DogBreedRemoteDataSourceImpl(private val apiClient: DogApiService) : DataS
             return ResultStatus.Error(
                 error = "errorCode :: ${response.code()} ==> ${response.message()}"
             )
-        }
-    }
-
-
-    /*
-     * Provide more information on Network related exceptions and propagate to the UI layer
-     */
-    private suspend fun <T> exceptionHandler(callback: suspend () -> ResultStatus<T>): ResultStatus<T> {
-        return try {
-            callback.invoke()
-        } catch (e: Throwable) {
-            when (e) {
-                // TODO() - is NetworkConnectivity error case (use Connectivity manager Util)
-                is HttpException -> ResultStatus.Error(
-                    error =
-                    "HttpException ==> ${e.message()}"
-                )
-
-                else -> ResultStatus.Error(error = "errorCode ==> ${e.message}")
-            }
         }
     }
 }

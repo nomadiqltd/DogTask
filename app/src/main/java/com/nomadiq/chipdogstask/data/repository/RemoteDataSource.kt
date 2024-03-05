@@ -10,6 +10,6 @@ import com.nomadiq.chipdogstask.domain.mapper.DogBreedListResult
  * from a remote source which is the dog ceo api.
  *
  */
-interface DataSource {
+interface RemoteDataSource {
     suspend fun fetchAllDogBreeds(): DogBreedListResult
 }
