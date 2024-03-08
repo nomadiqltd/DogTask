@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 /**
  * @author Michael Akakpo
  *
- * Dog Breed Entity class for DogBreeds, to be used in domain and presentation layers
+ * Dog Breed Entity class for [DogBreeds], to be used in domain and presentation layers
  *
  */
 data class DogBreed(

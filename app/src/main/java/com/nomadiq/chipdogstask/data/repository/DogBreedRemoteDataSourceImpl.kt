@@ -1,23 +1,29 @@
 package com.nomadiq.chipdogstask.data.repository
 
-import com.nomadiq.chipdogstask.data.network.DogApiService
 import com.nomadiq.chipdogstask.data.mapper.DogBreedListMapper
+import com.nomadiq.chipdogstask.data.mapper.DogBreedRandomImageListMapper
 import com.nomadiq.chipdogstask.domain.mapper.DogBreedListResult
-import com.nomadiq.chipdogstask.data.mapper.ResultStatus
+import com.nomadiq.chipdogstask.data.api.ResultStatus
 import com.nomadiq.chipdogstask.data.model.DogBreedApiResponse
-import retrofit2.Response
+import com.nomadiq.chipdogstask.data.model.DogBreedRandomImagesResponse
+import com.nomadiq.chipdogstask.data.api.DogBreedApiClient
+import com.nomadiq.chipdogstask.domain.mapper.DogBreedRandomImageResult
 
 /**
  * @author Michael Akakpo
  *
- * This is the remote data source, fetching data from a remote source,
- * process the result and allow retrieval of data from the [dog ceo api]
+ * This data source fetches data remotely,
+ * processes the result and allows retrieval and mapping of the API data from the [dog ceo api]
  *
  */
-class DogBreedRemoteDataSourceImpl(private val apiClient: DogApiService) : RemoteDataSource {
+class DogBreedRemoteDataSourceImpl(private val apiClient: DogBreedApiClient) : RemoteDataSource {
 
     private val dogBreedListMapper: DogBreedListMapper by lazy {
         DogBreedListMapper()
+    }
+
+    private val dogRandomImageListMapper: DogBreedRandomImageListMapper by lazy {
+        DogBreedRandomImageListMapper()
     }
 
     override suspend fun fetchAllDogBreeds(): DogBreedListResult {
@@ -25,25 +31,18 @@ class DogBreedRemoteDataSourceImpl(private val apiClient: DogApiService) : Remot
         return dogBreedListMapper.map(result)
     }
 
-    private suspend fun fetchAllDogBreedResult(): ResultStatus<DogBreedApiResponse> {
-        val response = apiClient.apiService.getAllDogBreeds()
-        return buildResultFrom(response)
+    override suspend fun fetchRandomImagesByDogBreed(breed: String): DogBreedRandomImageResult {
+        val result = fetchRandomImagesByDogBreedResult(breed = breed)
+        return dogRandomImageListMapper.map(result)
     }
 
+    private suspend fun fetchAllDogBreedResult(): ResultStatus<DogBreedApiResponse> {
+        val response = apiClient.fetchAllDogBreeds()
+        return buildResultStatusFrom(response)
+    }
 
-    /*
-     * Check the response from the [Dog API] and return a [ResultStatus]
-     * to provide a predetermined set of possible outcomes
-     */
-    private fun <T> buildResultFrom(response: Response<T>): ResultStatus<T> {
-        if (response.isSuccessful) {
-            response.body()?.let {
-                return ResultStatus.Data(it)
-            } ?: return ResultStatus.Empty(response.code())
-        } else {
-            return ResultStatus.Error(
-                error = "errorCode :: ${response.code()} ==> ${response.message()}"
-            )
-        }
+    private suspend fun fetchRandomImagesByDogBreedResult(breed: String): ResultStatus<DogBreedRandomImagesResponse> {
+        val response = apiClient.fetchRandomImagesByDogBreed(breed = breed)
+        return buildResultStatusFrom(response)
     }
 }

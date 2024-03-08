@@ -1,4 +1,4 @@
-package com.nomadiq.chipdogstask.data.mapper
+package com.nomadiq.chipdogstask.data.api
 
 /**
  * @author Michael Akakpo
@@ -16,5 +16,4 @@ sealed class ResultStatus<T> {
     data class Empty<T>(val status: Int) : ResultStatus<T>()
     data class Error<T>(val error: String) : ResultStatus<T>()
     data class NetworkError<T>(val message: String?) : ResultStatus<T>()
-    // TODO = Check if data class vs class for sealed class makes a difference
 }

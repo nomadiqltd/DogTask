@@ -1,15 +1,22 @@
 package com.nomadiq.chipdogstask.data.repository
 
 import com.nomadiq.chipdogstask.domain.mapper.DogBreedListResult
+import com.nomadiq.chipdogstask.domain.mapper.DogBreedRandomImageResult
+import com.nomadiq.chipdogstask.domain.repository.DogBreedRepository
 
 /**
  * @author Michael Akakpo
- * This is the remote data source, we are fetching data from remote source in our case, dog ceo api.
+ *
+ * This [DogBreedRepository] utilises the remote data source (and potentially others)
+ * to aggregate requested data from the [Dog Api].
  *
  */
-class DogBreedRepositoryImpl(private val dataSourceImpl: DogBreedRemoteDataSourceImpl) :
+class DogBreedRepositoryImpl(private val dogBreedDataSource: DogBreedRemoteDataSourceImpl) :
     DogBreedRepository {
 
     override suspend fun fetchAllDogBreeds(): DogBreedListResult =
-        dataSourceImpl.fetchAllDogBreeds()
+        dogBreedDataSource.fetchAllDogBreeds()
+
+    override suspend fun fetchRandomImagesByDogBreed(breed: String): DogBreedRandomImageResult =
+        dogBreedDataSource.fetchRandomImagesByDogBreed(breed = breed)
 }

@@ -29,17 +29,17 @@ import com.nomadiq.chipdogstask.domain.model.DogBreed
  * Composable to represent each [DogBreed] item in the list retrieved from the []Dog Api].
  */
 @Composable
-fun DogBreedItem(dog: DogBreed, onItemClicked: (dog: DogBreed) -> Unit) {
+fun DogBreedItem(item: DogBreed, onItemClick: (DogBreed) -> Unit) {
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = Color.Red, //Card background color
-            contentColor = Color.Gray  //Card content color,e.g.text
+            containerColor = Color.Red,
+            contentColor = Color.Gray
         ),
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
             .clip(RoundedCornerShape(16.dp))
-            .clickable(onClick = { onItemClicked(dog) }),
+            .clickable(onClick = { onItemClick(item) })
     ) {
         Row(
             modifier = Modifier
@@ -48,10 +48,9 @@ fun DogBreedItem(dog: DogBreed, onItemClicked: (dog: DogBreed) -> Unit) {
         ) {
 
             Spacer(modifier = Modifier.width(16.dp))
-
             Column(modifier = Modifier.align(Alignment.CenterVertically)) {
                 Text(
-                    text = dog.name,
+                    text = item.name,
                     modifier = Modifier.padding(0.dp, 0.dp, 12.dp, 0.dp),
                     color = MaterialTheme.colorScheme.secondary,
                     fontWeight = FontWeight.Bold,

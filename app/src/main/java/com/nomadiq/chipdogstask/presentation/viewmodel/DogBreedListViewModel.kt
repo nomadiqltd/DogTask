@@ -1,12 +1,11 @@
 package com.nomadiq.chipdogstask.presentation.viewmodel
 
-import androidx.compose.ui.text.capitalize
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nomadiq.chipdogstask.data.network.DogApiService
 import com.nomadiq.chipdogstask.data.repository.DogBreedRemoteDataSourceImpl
 import com.nomadiq.chipdogstask.data.repository.DogBreedRepositoryImpl
-import com.nomadiq.chipdogstask.domain.GetDogBreedListUseCase
+import com.nomadiq.chipdogstask.data.api.DogBreedApiClient
+import com.nomadiq.chipdogstask.domain.usecase.GetDogBreedListUseCase
 import com.nomadiq.chipdogstask.domain.mapper.DogBreedListResult
 import com.nomadiq.chipdogstask.domain.model.DogBreed
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,10 +31,10 @@ class DogBreedListViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(DogBreedListUiState(listOf()))
     val uiState: StateFlow<DogBreedListUiState> = _uiState.asStateFlow()
 
-    private val getCalendarUseCase: GetDogBreedListUseCase by lazy {
+    private val getDogBreedListUseCase: GetDogBreedListUseCase by lazy {
         GetDogBreedListUseCase(
             dogBreedRepository = DogBreedRepositoryImpl(
-                dataSourceImpl = DogBreedRemoteDataSourceImpl(DogApiService)
+                dogBreedDataSource = DogBreedRemoteDataSourceImpl(apiClient = DogBreedApiClient.create())
             )
         )
     }
@@ -47,7 +46,7 @@ class DogBreedListViewModel : ViewModel() {
     // Function to fetch List of [DogBreed] - save success response and update uiState
     private fun displayDogBreedList() {
         viewModelScope.launch {
-            getCalendarUseCase.invoke().collect { result ->
+            getDogBreedListUseCase.invoke().collect { result ->
                 when (result) {
                     is DogBreedListResult.Data -> {
                         _uiState.update { currentState ->
@@ -62,6 +61,7 @@ class DogBreedListViewModel : ViewModel() {
                             )
                         }
                     }
+
                     else -> {
                         _uiState.update { currentState -> currentState.copy(isLoading = false) }
                     }

@@ -2,8 +2,15 @@ package com.nomadiq.chipdogstask.data.model
 
 import com.squareup.moshi.JsonClass
 
+/**
+ * @author Michael Akakpo
+ *
+ * data class to represent all breeds from the API.
+ * The objects were mostly empty, so it was simpler to map them to strings
+ */
+
 @JsonClass(generateAdapter = true)
-data class Message(
+data class DogBreeds(
     val affenpinscher: Map<String, List<String>>,
     val african: Map<String, List<String>>,
     val airedale: Map<String, List<String>>,

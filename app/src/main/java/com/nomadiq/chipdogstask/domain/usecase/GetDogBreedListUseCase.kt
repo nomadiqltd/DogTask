@@ -1,4 +1,4 @@
-package com.nomadiq.chipdogstask.domain
+package com.nomadiq.chipdogstask.domain.usecase
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import com.nomadiq.chipdogstask.data.repository.DogBreedRepositoryImpl
@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
 /**
  * @author Michael Akakpo
  *
- * Use case for fetching a list of [DogBreed] from presentation layer
+ * Use case for loading a list of [DogBreed] for user to view within a list
  */
 
 class GetDogBreedListUseCase(
