@@ -153,13 +153,15 @@ dependencies {
 
     // Hamcrest Assertions
     testImplementation("org.hamcrest:hamcrest:2.2")
-    androidTestImplementation("org.hamcrest:hamcrest:2.2")
 
     // For Mockk
     testImplementation("io.mockk:mockk:1.13.4")
 
     // Espresso
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    // Navigation Testing
+    implementation("androidx.navigation:navigation-testing:2.7.7")
 
     // Junit Testing
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
