@@ -32,8 +32,7 @@ import com.nomadiq.chipdogstask.domain.model.DogBreed
 fun DogBreedItem(item: DogBreed, onItemClick: (DogBreed) -> Unit) {
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = Color.Red,
-            contentColor = Color.Gray
+            containerColor = Color.Gray,
         ),
         modifier = Modifier
             .fillMaxWidth()
@@ -52,9 +51,9 @@ fun DogBreedItem(item: DogBreed, onItemClick: (DogBreed) -> Unit) {
                 Text(
                     text = item.name,
                     modifier = Modifier.padding(0.dp, 0.dp, 12.dp, 0.dp),
-                    color = MaterialTheme.colorScheme.secondary,
-                    fontWeight = FontWeight.Bold,
-                    style = typography.bodyMedium
+                    color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Black,
+                    style = typography.bodyLarge
                 )
                 Spacer(modifier = Modifier.height(8.dp))
             }

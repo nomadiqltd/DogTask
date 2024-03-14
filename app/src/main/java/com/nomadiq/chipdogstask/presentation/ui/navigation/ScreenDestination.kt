@@ -14,7 +14,7 @@ sealed class ScreenDestination(
     val route: String,
     val navArguments: List<NamedNavArgument> = emptyList()
 ) {
-    data object DogBreedListScreen : ScreenDestination(route = "mainScreen")
+    data object DogBreedListScreen : ScreenDestination(route = "listScreen")
 
     data object DogBreedDetailScreen : ScreenDestination(
         route = "itemDetail/{breed}",
