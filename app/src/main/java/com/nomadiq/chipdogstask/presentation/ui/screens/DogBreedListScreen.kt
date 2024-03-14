@@ -17,6 +17,13 @@ import com.nomadiq.chipdogstask.presentation.ui.component.DogBreedItem
 import com.nomadiq.chipdogstask.presentation.ui.theme.ChipDogsTaskTheme
 import com.nomadiq.chipdogstask.presentation.viewmodel.DogBreedListUiState
 
+/**
+ *  @author Michael Akakpo
+ *
+ *  Composable representing the list of [Dog breed] items within the Lazy column
+ *
+ */
+
 @Composable
 fun DogBreedListScreen(
     onItemClick: (DogBreed) -> Unit = {},

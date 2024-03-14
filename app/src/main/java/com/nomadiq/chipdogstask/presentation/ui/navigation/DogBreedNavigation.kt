@@ -21,7 +21,8 @@ import com.nomadiq.chipdogstask.presentation.viewmodel.DogBreedRandomImageViewMo
 /**
  *  @author Michael Akakpo
  *
- *  Navigation graph containing Composable and NavHost to demonstrate relationships between screens
+ *  Navigation graph containing Composable and NavHost to demonstrate
+ *  relationships between screens
  *
  */
 

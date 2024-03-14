@@ -6,6 +6,7 @@ import com.nomadiq.chipdogstask.domain.mapper.DogBreedListResult
 import com.nomadiq.chipdogstask.domain.mapper.DogBreedRandomImageResult
 import com.nomadiq.chipdogstask.domain.model.DogBreed
 import com.nomadiq.chipdogstask.domain.model.DogBreedImageDetail
+import com.nomadiq.chipdogstask.presentation.viewmodel.DogBreedListViewModel
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.types.shouldBeSameInstanceAs
 import io.mockk.MockKAnnotations
@@ -23,6 +24,14 @@ import utils.CoroutineTestRule
 import utils.TestConstants.BREED
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
+
+/**
+ *  @author Michael Akakpo
+ *
+ *  Unit tests for [DogBreedListRepository]
+ *
+ */
+
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class DogBreedListRepositoryTest {

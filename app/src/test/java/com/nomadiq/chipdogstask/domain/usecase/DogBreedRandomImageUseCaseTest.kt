@@ -21,6 +21,13 @@ import utils.CoroutineTestRule
 import utils.TestConstants.BREED
 import kotlin.test.assertTrue
 
+/**
+ *  @author Michael Akakpo
+ *
+ *  Usecase test for determining correct functioning of Usecase and supporting Repository
+ *
+ */
+
 @RunWith(MockitoJUnitRunner::class)
 @ExperimentalCoroutinesApi
 class DogBreedRandomImageUseCaseTest {

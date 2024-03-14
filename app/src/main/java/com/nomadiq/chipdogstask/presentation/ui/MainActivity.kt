@@ -10,6 +10,13 @@ import com.nomadiq.chipdogstask.presentation.ui.navigation.DogBreedsApp
 import com.nomadiq.chipdogstask.presentation.ui.theme.ChipDogsTaskTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ *  @author Michael Akakpo
+ *
+ *  MainActivity hosting the NvHost and all navigation
+ *
+ */
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalAnimationApi::class)

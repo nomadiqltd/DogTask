@@ -6,9 +6,16 @@ import com.nomadiq.chipdogstask.domain.model.DogBreed
 import com.nomadiq.chipdogstask.domain.model.DogBreedImageDetail
 import com.nomadiq.chipdogstask.domain.repository.DogBreedRepository
 
+/**
+ *  @author Michael Akakpo
+ *
+ *  Fake DogBreedRepository implementation to simplify testing other components that depend on it
+ *
+ */
+
 class FakeDogBreedRepositoryImpl : DogBreedRepository {
 
-   protected var generateError = false
+    protected var generateError = false
 
     companion object {
         private const val requestError = "errorCode = 404, DogBreed list data not found"

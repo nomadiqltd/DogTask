@@ -5,6 +5,13 @@ import com.nomadiq.chipdogstask.domain.mapper.DogBreedRandomImageResult
 import com.nomadiq.chipdogstask.domain.model.DogBreed
 import com.nomadiq.chipdogstask.domain.model.DogBreedImageDetail
 
+/**
+ *  @author Michael Akakpo
+ *
+ *  Fake Data source implementation to simplify testing other components that depend on it
+ *
+ */
+
 class FakeRemoteDataSource : RemoteDataSource {
     companion object {
 

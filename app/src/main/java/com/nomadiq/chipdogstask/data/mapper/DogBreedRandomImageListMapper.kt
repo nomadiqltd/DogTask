@@ -34,7 +34,7 @@ class DogBreedRandomImageListMapper :
 
     private fun createDataFromResponseResult(data: DogBreedRandomImagesResponse): List<DogBreedImageDetail> {
         val list = mutableListOf<DogBreedImageDetail>()
-        data.message?.forEach { item ->
+        data.message.forEach { item ->
             list.addAll(listOf(DogBreedImageDetail(imageUrl = item)))
         }
         return list

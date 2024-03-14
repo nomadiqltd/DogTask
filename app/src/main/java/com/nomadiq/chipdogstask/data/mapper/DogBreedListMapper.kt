@@ -28,7 +28,8 @@ class DogBreedListMapper : Mapper<ResultStatus<DogBreedApiResponse>, DogBreedLis
     private fun createDataFromResponseResult(data: DogBreedApiResponse): List<DogBreed> {
         val list = mutableListOf<DogBreed>()
         val results = data.message
-        // TODO() - Deal with subbreeds and take Breed only (keys) for now as Subbreeds return 404 against random images endpoint
+        /* TODO() - Not in the spec to deal with subbreeds. So we take the parent Breed only (keys)
+            for now as Subbreeds return 404 against random images endpoint */
         results.forEach { item ->
             list.addAll(listOf(DogBreed(name = item.key)))
         }

@@ -1,4 +1,4 @@
-package com.nomadiq.chipdogstask
+package com.nomadiq.chipdogstask.compose
 
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertTextContains

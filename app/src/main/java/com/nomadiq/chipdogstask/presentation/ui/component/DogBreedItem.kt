@@ -26,7 +26,7 @@ import com.nomadiq.chipdogstask.domain.model.DogBreed
 /**
  * @author Michael Akakpo
  *
- * Composable to represent each [DogBreed] item in the list retrieved from the []Dog Api].
+ * Composable to represent each [DogBreed] item in the list retrieved from the [Dog Api].
  */
 @Composable
 fun DogBreedItem(item: DogBreed, onItemClick: (DogBreed) -> Unit) {
