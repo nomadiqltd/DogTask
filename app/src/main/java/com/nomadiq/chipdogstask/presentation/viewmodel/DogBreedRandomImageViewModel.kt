@@ -1,9 +1,7 @@
 package com.nomadiq.chipdogstask.presentation.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nomadiq.chipdogstask.data.repository.DogBreedRemoteDataSourceImpl
@@ -13,8 +11,6 @@ import com.nomadiq.chipdogstask.domain.mapper.DogBreedRandomImageResult
 import com.nomadiq.chipdogstask.domain.model.DogBreed
 import com.nomadiq.chipdogstask.domain.model.DogBreedImageDetail
 import com.nomadiq.chipdogstask.domain.usecase.GetDogBreedRandomImageUseCase
-import com.nomadiq.chipdogstask.presentation.base.DogBreedApplication
-import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -42,12 +38,13 @@ class DogBreedRandomImageViewModel @Inject constructor(
     val uiState: StateFlow<DogBreedRandomImageUiState> = _uiState.asStateFlow()
 
     // TODO() - constant value // TODO: store key
-    val breed: String = checkNotNull(savedStateHandle.getStateFlow(key = "breed", initialValue = "")).value
+    val breed: String =
+        checkNotNull(savedStateHandle.getStateFlow(key = "breed", initialValue = "")).value
 
     private val getDogBreedRandomImageUseCase: GetDogBreedRandomImageUseCase by lazy {
         GetDogBreedRandomImageUseCase(
             dogBreedRepository = DogBreedRepositoryImpl(
-                dogBreedDataSource = DogBreedRemoteDataSourceImpl(apiClient = DogBreedApiClient.create())
+                datasource = DogBreedRemoteDataSourceImpl(apiClient = DogBreedApiClient.create()),
             )
         )
     }

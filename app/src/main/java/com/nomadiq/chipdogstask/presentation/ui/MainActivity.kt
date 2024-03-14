@@ -23,7 +23,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
 @OptIn(ExperimentalAnimationApi::class)
 @Preview(showBackground = true)
 @Composable

@@ -8,6 +8,7 @@ import com.nomadiq.chipdogstask.data.model.DogBreedApiResponse
 import com.nomadiq.chipdogstask.data.model.DogBreedRandomImagesResponse
 import com.nomadiq.chipdogstask.data.api.DogBreedApiClient
 import com.nomadiq.chipdogstask.domain.mapper.DogBreedRandomImageResult
+import javax.inject.Inject
 
 /**
  * @author Michael Akakpo
@@ -16,7 +17,8 @@ import com.nomadiq.chipdogstask.domain.mapper.DogBreedRandomImageResult
  * processes the result and allows retrieval and mapping of the API data from the [dog ceo api]
  *
  */
-class DogBreedRemoteDataSourceImpl(private val apiClient: DogBreedApiClient) : RemoteDataSource {
+class DogBreedRemoteDataSourceImpl @Inject constructor(private val apiClient: DogBreedApiClient) :
+    RemoteDataSource {
 
     private val dogBreedListMapper: DogBreedListMapper by lazy {
         DogBreedListMapper()

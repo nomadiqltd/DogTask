@@ -60,12 +60,19 @@ android {
 }
 
 dependencies {
+    // Ktx Core Kotlin
     implementation("androidx.core:core-ktx:1.12.0")
+
+    // Lifecycle components
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+
+    // Activity for ComponentSelection UI
     implementation("androidx.activity:activity-compose:1.8.2")
+
+    // Compose Bom / UI
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    implementation("androidx.compose.ui:ui-android:1.6.2")
-    implementation("androidx.compose.ui:ui-graphics-android:1.6.2")
+    implementation("androidx.compose.ui:ui-android:1.6.3")
+    implementation("androidx.compose.ui:ui-graphics-android:1.6.3")
 
     // Image Loading
     implementation("io.coil-kt:coil-compose:2.6.0")
@@ -94,6 +101,7 @@ dependencies {
     // Data Mapping Serialisation
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0")
 
+    // Coroutines / Asynchronous operations / Flows
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
@@ -108,20 +116,56 @@ dependencies {
 
     // Hilt - For instrumentation tests
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.51")
-    androidTestAnnotationProcessor("com.google.dagger:hilt-compiler:2.51")
+    kapt("com.google.dagger:hilt-compiler:2.51")
 
     // Hilt - For local unit tests
     testImplementation("com.google.dagger:hilt-android-testing:2.51")
-    testAnnotationProcessor("com.google.dagger:hilt-compiler:2.51")
+    kapt("com.google.dagger:hilt-compiler:2.51")
 
     // Compose preview
-    implementation("androidx.compose.ui:ui-tooling-preview-android:1.6.2")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.6.2")
+    implementation("androidx.compose.ui:ui-tooling-preview-android:1.6.3")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.6.3")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+    // For Coroutines testing
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+
+    // JUnit4
     testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("junit:junit:4.13.2")
+
+    // JUnit5
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+    testImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
+
+    // For Kotest
+    testImplementation("io.kotest:kotest-assertions-core:5.4.2")
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+
+    // Mockito
+    testImplementation("org.mockito:mockito-core:5.2.0")
+
+    // Google Truth - Assertions
+    testImplementation("com.google.truth:truth:1.4.2")
+    testImplementation("com.google.truth:truth:1.4.2")
+
+    // Hamcrest Assertions
+    testImplementation("org.hamcrest:hamcrest:2.2")
+    androidTestImplementation("org.hamcrest:hamcrest:2.2")
+
+    // For Mockk
+    testImplementation("io.mockk:mockk:1.13.4")
+
+    // Espresso
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
+
+    // Junit Testing
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+
+    // Testing Compose
+    androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
+
+    // TODO() - Could utilise new Android versioning catalog - libs.versions.toml
 }

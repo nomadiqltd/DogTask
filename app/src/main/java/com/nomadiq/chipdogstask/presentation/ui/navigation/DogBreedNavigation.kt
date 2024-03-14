@@ -19,7 +19,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -30,10 +29,12 @@ import com.nomadiq.chipdogstask.presentation.ui.screens.DogBreedItemDetailScreen
 import com.nomadiq.chipdogstask.presentation.ui.screens.DogBreedListScreen
 import com.nomadiq.chipdogstask.presentation.viewmodel.DogBreedListViewModel
 import com.nomadiq.chipdogstask.presentation.viewmodel.DogBreedRandomImageViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Composable that displays the topBar and displays back button if back navigation is possible.
  */
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DogBreedTopAppBar(
@@ -64,7 +65,6 @@ fun DogBreedTopAppBar(
 @ExperimentalAnimationApi
 @Composable
 fun DogBreedsApp(
-    viewModel: DogBreedListViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
 ) {
     // Get current back stack entry
@@ -92,6 +92,7 @@ fun DogBreedsApp(
             startDestination = ScreenDestination.DogBreedListScreen.route
         ) {
             composable(route = ScreenDestination.DogBreedListScreen.route) {
+                val viewModel = hiltViewModel<DogBreedListViewModel>()
                 val uiState by viewModel.uiState.collectAsState()
                 DogBreedListScreen(
                     uiState = uiState,
@@ -108,8 +109,8 @@ fun DogBreedsApp(
                 route = ScreenDestination.DogBreedDetailScreen.route,
                 arguments = ScreenDestination.DogBreedDetailScreen.navArguments
             ) {
-                val viewModel = hiltViewModel<DogBreedRandomImageViewModel>()
-                val uiState by viewModel.uiState.collectAsState()
+                val dogBreedRandomImageViewModel = hiltViewModel<DogBreedRandomImageViewModel>()
+                val uiState by dogBreedRandomImageViewModel.uiState.collectAsState()
                 DogBreedItemDetailScreen(
                     navController = navController,
                     uiState = uiState

@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.Locale
+import javax.inject.Inject
 
 /**
  * @author - Michael Akakpo
@@ -31,10 +32,11 @@ class DogBreedListViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(DogBreedListUiState(listOf()))
     val uiState: StateFlow<DogBreedListUiState> = _uiState.asStateFlow()
 
+    @delegate:Inject
     private val getDogBreedListUseCase: GetDogBreedListUseCase by lazy {
         GetDogBreedListUseCase(
             dogBreedRepository = DogBreedRepositoryImpl(
-                dogBreedDataSource = DogBreedRemoteDataSourceImpl(apiClient = DogBreedApiClient.create())
+                datasource = DogBreedRemoteDataSourceImpl(apiClient = DogBreedApiClient.create()),
             )
         )
     }
@@ -62,12 +64,29 @@ class DogBreedListViewModel : ViewModel() {
                         }
                     }
 
-                    else -> {
-                        _uiState.update { currentState -> currentState.copy(isLoading = false) }
-                    }
+                    is DogBreedListResult.Empty ->
+                        logDogBreedListResult("Empty list returned")
+                    // TODO - constants for error messages
+
+                    is DogBreedListResult.Error ->
+                        logDogBreedListResult("Unknown error occurred")
+
+                    is DogBreedListResult.NetworkError ->
+                        logDogBreedListResult("Network error occurred")
+
                 }
+                _uiState.update { currentState -> currentState.copy(isLoading = false) }
             }
-            _uiState.update { currentState -> currentState.copy(isLoading = false) }
+        }
+    }
+
+    private fun logDogBreedListResult(errorMessage: String) {
+        _uiState.update {
+            it.copy(
+                isLoading = false,
+                items = listOf(),
+                errorMessage = errorMessage
+            )
         }
     }
 }

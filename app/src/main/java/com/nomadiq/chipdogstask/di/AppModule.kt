@@ -6,11 +6,14 @@ import com.nomadiq.chipdogstask.data.repository.DogBreedRemoteDataSourceImpl
 import com.nomadiq.chipdogstask.data.repository.DogBreedRepositoryImpl
 import com.nomadiq.chipdogstask.data.repository.RemoteDataSource
 import com.nomadiq.chipdogstask.domain.repository.DogBreedRepository
-import dagger.Binds
+import com.nomadiq.chipdogstask.domain.usecase.GetDogBreedListUseCase
+import com.nomadiq.chipdogstask.domain.usecase.GetDogBreedRandomImageUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
@@ -31,8 +34,25 @@ object AppModule {
     fun provideDogBreedRemoteDataSource(apiClient: DogBreedApiClient): RemoteDataSource =
         DogBreedRemoteDataSourceImpl(apiClient)
 
+    @Provides
+    fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO
+
     @Singleton
     @Provides
-    fun provideDogBreedRepository(dogBreedDataSource: DogBreedRemoteDataSourceImpl): DogBreedRepository =
+    fun provideDogBreedRepository(dogBreedDataSource: RemoteDataSource): DogBreedRepository =
         DogBreedRepositoryImpl(dogBreedDataSource)
+
+    @Provides
+    fun provideGetDogBreedListUseCase(): GetDogBreedListUseCase = GetDogBreedListUseCase(
+        dogBreedRepository = provideDogBreedRepository(
+            dogBreedDataSource = provideDogBreedRemoteDataSource(apiClient = provideDogBreedApiClient())
+        )
+    )
+
+    @Provides
+    fun provideGetDogBreedRandomImageUseCase(): GetDogBreedRandomImageUseCase = GetDogBreedRandomImageUseCase(
+        dogBreedRepository = provideDogBreedRepository(
+            dogBreedDataSource = provideDogBreedRemoteDataSource(apiClient = provideDogBreedApiClient())
+        )
+    )
 }
