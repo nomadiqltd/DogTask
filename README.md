@@ -8,14 +8,16 @@ This is a Jetpack Compose Android app which displays images of selected Dog Bree
 
 **Target Android SDK Version:** 34
 
+**JDK Version:** 17
+
 **App Version 1.0.0**
 
 **Build System**
-Gradle
-Kotlin
+- Gradle
+- Kotlin
 
 # Architecture
-The chosen architecture is MMVM (Model View ViewModel) with a Clean-ish approach. 
+The chosen architecture is MVVM (Model View ViewModel) with a Clean-ish approach. 
 
 The main 3 layers are: 
 
@@ -24,10 +26,10 @@ The main 3 layers are:
 
 **Domain Layer**
 - The domain layer is the mediator between the data layer and the presentation layer.
-- This app is pretty small but for future scalability it will become more complex and all that logic that would have lived in the ViewModel would now reside in UseCases instead (optional layer).
+- This app is pretty small but for future scalability it will become more complex and all that logic that would have lived in the ViewModel would now reside in smaller UseCases instead (optional layer).
 
 **Data Layer**
-- The data layer contains repositories that abstract away the complexity of the data's origins. In this case it's all remote data but it has the capability to extend to a Databse or other form of local storage.
+- The data layer contains repositories that abstract away the complexity of the data's origins. In this case it's all remote data but it has the capability to extend to a Database or other form of local storage.
 
 **Project Dependencies**
 
@@ -77,14 +79,14 @@ Coverage can always be improved. Included a sample of various test types to cove
 
 
 💻 Demo
-An app walkthrough can arranged to talk through the various layers and rationale behind some design decisions. 
+- An app walkthrough can arranged to talk through the various layers and rationale behind some design decisions. 
 
 # **Run the app:**
-On Github, check out the 'main' branch
-Press play 
-Command: gradle assembledDebug
+- On Github, check out the 'main' branch
+- Press 'play' or
+- Command: gradle assembleDebug
 
-# **Known Improvements: **
+# **Known Improvements:**
 
 - Theming and UI is incomplete (could use some colours from the Chip design palette)
 - The toolbar navigation works well with smaller less complex app, but in a larger app could require a different approach with third parties depending on the use case etc
@@ -93,6 +95,6 @@ Command: gradle assembledDebug
 - Persist the Dogs so the user always has access even when offline
 
 # **Out of Scope**
-- Handling of subbreeds
+- Handling of Dog Sub breeds
 - Offline mode
-- Minor testing in obfuscated / Proguard mode only
+- Minor testing in obfuscated mode / Proguard mode only
